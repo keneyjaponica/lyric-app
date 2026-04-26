@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>Lyric Generator</title>
+</head>
+<body>
+  <h2>リリック生成</h2>
+
+  <input id="input" placeholder="単語を入力" />
+  <button onclick="generate()">生成</button>
+  <button onclick="copyText()">コピー</button>
+
+  <p id="output"></p>
+
+  <script>
+    function generate() {
+      const word = document.getElementById("input").value;
+
+      const templates = [
+        `${word} に囲まれた street life`,
+        `夜の中で響く ${word} の vibe`,
+        `${word} で変わる俺の未来`,
+        `この街で掴む ${word} の chance`
+      ];
+
+      const random = templates[Math.floor(Math.random() * templates.length)];
+      document.getElementById("output").innerText = random;
+    }
+
+    function copyText() {
+      const text = document.getElementById("output").innerText;
+      navigator.clipboard.writeText(text);
+      alert("コピーしたで");
+    }
+  </script>
+</body>
+</html>
