@@ -2,30 +2,62 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>Lyric Generator</title>
+  <title>リリック素材ジェネレーター</title>
 </head>
 <body>
-  <h2>リリック生成</h2>
+  <h2>日本語ラップ素材生成</h2>
 
-  <input id="input" placeholder="単語を入力" />
+  <input id="input" placeholder="キーワード（例：金、地元）" />
   <button onclick="generate()">生成</button>
   <button onclick="copyText()">コピー</button>
 
-  <p id="output"></p>
+  <pre id="output"></pre>
 
   <script>
     function generate() {
       const word = document.getElementById("input").value;
 
-      const templates = [
-        `${word} に囲まれた street life`,
-        `夜の中で響く ${word} の vibe`,
-        `${word} で変わる俺の未来`,
-        `この街で掴む ${word} の chance`
+      const street = [
+        "地元", "仲間", "路地裏", "夜中", "フッド",
+        "現場", "リアル", "マイク", "スタジオ", "地下"
       ];
 
-      const random = templates[Math.floor(Math.random() * templates.length)];
-      document.getElementById("output").innerText = random;
+      const emotion = [
+        "孤独", "欲望", "葛藤", "本音", "プライド",
+        "怒り", "愛", "不安", "夢", "過去"
+      ];
+
+      const success = [
+        "金", "成功", "上昇", "頂点", "未来",
+        "勝利", "野望", "逆転", "チャンス", "一発"
+      ];
+
+      const rhymeA = ["金", "神", "闇", "波", "罠"];
+      const rhymeI = ["火", "日々", "意味", "君", "道"];
+      const rhymeO = ["flow", "go", "low", "no", "show"];
+
+      function random(arr) {
+        return arr[Math.floor(Math.random() * arr.length)];
+      }
+
+      const result = `
+${word}
+
+${random(street)}
+${random(emotion)}
+${random(success)}
+
+${random(rhymeA)}
+${random(rhymeA)}
+
+${random(rhymeI)}
+${random(rhymeI)}
+
+${random(rhymeO)}
+${random(rhymeO)}
+`;
+
+      document.getElementById("output").innerText = result;
     }
 
     function copyText() {
