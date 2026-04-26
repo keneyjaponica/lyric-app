@@ -2,69 +2,35 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>リリック素材ジェネレーター</title>
+  <title>連打ゲーム</title>
 </head>
 <body>
-  <h2>日本語ラップ素材生成</h2>
+  <h2>10秒で何回押せる？</h2>
 
-  <input id="input" placeholder="キーワード（例：金、地元）" />
-  <button onclick="generate()">生成</button>
-  <button onclick="copyText()">コピー</button>
-
-  <pre id="output"></pre>
+  <button onclick="tap()">タップ</button>
+  <p id="count">0</p>
+  <p id="time">10</p>
 
   <script>
-    function generate() {
-      const word = document.getElementById("input").value;
+    let count = 0;
+    let time = 10;
 
-      const street = [
-        "地元", "仲間", "路地裏", "夜中", "フッド",
-        "現場", "リアル", "マイク", "スタジオ", "地下"
-      ];
-
-      const emotion = [
-        "孤独", "欲望", "葛藤", "本音", "プライド",
-        "怒り", "愛", "不安", "夢", "過去"
-      ];
-
-      const success = [
-        "金", "成功", "上昇", "頂点", "未来",
-        "勝利", "野望", "逆転", "チャンス", "一発"
-      ];
-
-      const rhymeA = ["金", "神", "闇", "波", "罠"];
-      const rhymeI = ["火", "日々", "意味", "君", "道"];
-      const rhymeO = ["flow", "go", "low", "no", "show"];
-
-      function random(arr) {
-        return arr[Math.floor(Math.random() * arr.length)];
+    function tap() {
+      if (time > 0) {
+        count++;
+        document.getElementById("count").innerText = count;
       }
-
-      const result = `
-${word}
-
-${random(street)}
-${random(emotion)}
-${random(success)}
-
-${random(rhymeA)}
-${random(rhymeA)}
-
-${random(rhymeI)}
-${random(rhymeI)}
-
-${random(rhymeO)}
-${random(rhymeO)}
-`;
-
-      document.getElementById("output").innerText = result;
     }
 
-    function copyText() {
-      const text = document.getElementById("output").innerText;
-      navigator.clipboard.writeText(text);
-      alert("コピーしたで");
-    }
+    const timer = setInterval(() => {
+      time--;
+      document.getElementById("time").innerText = time;
+
+      if (time === 0) {
+        clearInterval(timer);
+        alert("終了！記録: " + count);
+      }
+    }, 1000);
   </script>
 </body>
 </html>
